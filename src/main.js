@@ -2,25 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import './assets/main.css'
-import {createRouter, createWebHashHistory} from 'vue-router'
-import ViewNotes from '@/views/ViewNotes.vue'
-import ViewStats from '@/views/ViewStats.vue'
 
-const router = createRouter({
-	history: createWebHashHistory(),
-	routes: [
-		{
-			path: '/',
-			name: 'notes',
-			component: ViewNotes
-		},
-		{
-			path: '/stats',
-			name: 'stats',
-			component: ViewStats
-		}
-	]
-})
+// when no name is specified index.js is the default
+import router from '@/router'
 
 createApp(App)
 	.use(router)
