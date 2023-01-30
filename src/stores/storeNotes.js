@@ -11,6 +11,18 @@ export const useStoreNotes = defineStore('storeNotes', {
 				id: 'id2',
 				content: "Bobbie eiusmod velit mollit officia quis ea qui. Aute duis labore labore laborum. Veniam incididunt laboris sint excepteur culpa non adipisicing minim reprehenderit ullamco excepteur proident ex nisi. Commodo enim est cupidatat adipisicing esse occaecat occaecat laboris pariatur occaecat sint. Pariatur id consequat minim cillum proident nostrud adipisicing fugiat veniam."	
 			}
-		]
-	}}
+		]}
+	},
+	actions: {
+		addNote(newNoteContent) {
+			let currentDate = new Date().getTime()
+			let id = currentDate.toString()
+		
+			let note = {
+				id,
+				content: newNoteContent
+			}
+			this.notes.unshift(note)
+		}
+	}
 })
