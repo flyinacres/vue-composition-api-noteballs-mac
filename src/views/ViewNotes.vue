@@ -23,20 +23,18 @@
 		</div>
 
 
-		<div class="card mb-4" v-for="note in notes" :key="note.id">
-			<div class="card-content">
-				{{ note.content }}
-			</div>
-			<footer class="card-footer">
-				<a href="#" class="card-footer-item pr-2">Edit</a>
-				<a href="#" class="card-footer-item">Delete</a>
-			</footer>
-		</div>
+		<Note 
+			v-for="note in notes" 
+			:key="note.id"
+			:note="note">
+		</Note>
+
 	</div>
 </template>
 
 <script setup>
 import {ref} from 'vue'
+import Note from '@/components/Notes/Note.vue'
 
 const newNote = ref("")
 // Note that it is not enough to put the ref in the template, it needs to be
