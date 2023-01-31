@@ -1,7 +1,8 @@
 <template>
 	<div class="notes">
 		<AddEditNote
-			v-model="newNote">
+			v-model="newNote"
+			ref="addEditNoteRef">
 			<template #buttons>
 				<button
 					@click="addNote"
@@ -29,18 +30,14 @@ import { useStoreNotes } from '@/stores/storeNotes'
 import AddEditNote from '@/components/Notes/AddEditNote.vue'
 
 const newNote = ref("")
-// Note that it is not enough to put the ref in the template, it needs to be
-// defined here in order to use it.
-const newNoteRef = ref(null)
-
 const storeNotes = useStoreNotes()
-
+const addEditNoteRef = ref(null)
 
 const addNote = () => {
 
 	storeNotes.addNote(newNote.value)
-
 	newNote.value = ""
+	addEditNoteRef.value.focusTextArea()
 }
 
 </script>
