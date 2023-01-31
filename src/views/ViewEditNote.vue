@@ -37,6 +37,6 @@ const route = useRoute()
 
 const storeNotes = useStoreNotes()
 const noteContent = ref('')
-noteContent.value = storeNotes.getNoteContent
+noteContent.value = storeNotes.getNoteContent(route.params.id)
 
 </script>
