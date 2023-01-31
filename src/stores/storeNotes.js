@@ -25,8 +25,13 @@ export const useStoreNotes = defineStore('storeNotes', {
 			this.notes.unshift(note)
 		},
 		deleteNote(idToDelete) {
-			console.log("delete " + idToDelete)
 			this.notes = this.notes.filter(note => {return note.id != idToDelete} )
+		},
+		updateNote(id, content) {
+			let index = this.notes.findIndex(note => {
+				return note.id === id
+			})
+			this.notes[index].content = content
 		}
 	}, 
 	getters: {

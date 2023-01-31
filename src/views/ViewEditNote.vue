@@ -8,13 +8,14 @@
 			ref="addEditNoteRef">
 			<template #buttons>
 				<button
-					class="button is-link is-light"
+					class="button is-link is-light mr-2"
 					@click="$router.back()"
 					>
 					Cancel
 				</button>
 				<button
 					class="button is-link has-background-link"
+					@click="handleSaveClicked"
 					:disabled="!noteContent"
 					>
 					Save Note
@@ -39,4 +40,7 @@ const storeNotes = useStoreNotes()
 const noteContent = ref('')
 noteContent.value = storeNotes.getNoteContent(route.params.id)
 
+const handleSaveClicked = () => {
+	storeNotes.updateNote(route.params.id, noteContent.value)
+}
 </script>
