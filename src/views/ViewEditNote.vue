@@ -1,7 +1,34 @@
 <template>
 	<div class="edit-note">
-		<h1>Edit Note </h1>
+		<AddEditNote
+			v-model="noteContent"
+			bgColor="link"
+			placeHolder="Edit Note"
+			label="Edit Note"
+			ref="addEditNoteRef">
+			<template #buttons>
+				<button
+					class="button is-link is-light"
+					@click="$router.back()"
+					>
+					Cancel
+				</button>
+				<button
+					class="button is-link has-background-link"
+					:disabled="!noteContent"
+					>
+					Save Note
+				</button>
+
+			</template>
+		</AddEditNote>
 	</div>
 	
 </template>
 
+
+<script setup>
+import {ref} from 'vue'
+import AddEditNote from '@/components/Notes/AddEditNote.vue'
+const noteContent = ref("")
+</script>
