@@ -59,7 +59,7 @@ onClickOutside(navbarMenuRef, (event) => {
 
 </script>
 
-<style scoped>
+<style>
 @media (max-width: 1023px) {
 	.navbar-menu {
 		position: absolute;
