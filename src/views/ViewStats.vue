@@ -28,6 +28,7 @@
 		</table>
 	</div>
 	<input
+		v-model="loveNoteballs"
 		class="input"
 		type="text"
 		v-autofocus
@@ -37,6 +38,10 @@
 <script setup>
 import {useStoreNotes} from '@/stores/storeNotes'
 import {vAutofocus} from '@/directives/vAutofocus'
+import {useWatchCharacters} from '@/use/useWatchCharacters'
+import {ref} from 'vue'
 
 const storeNotes = useStoreNotes()
+const loveNoteballs = ref(null)
+useWatchCharacters(loveNoteballs)
 </script>
