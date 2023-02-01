@@ -21,7 +21,9 @@
 				Delete
 			</a>
 		</footer>
-		<ModalDeleteNote v-if="modals.deleteNote"/>
+		<ModalDeleteNote 
+			v-model="modals.deleteNote"
+			v-if="modals.deleteNote"/>
 	</div>
 	
 </template>
