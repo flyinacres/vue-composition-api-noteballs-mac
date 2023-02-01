@@ -23,18 +23,17 @@
 		</footer>
 		<ModalDeleteNote 
 			v-model="modals.deleteNote"
-			v-if="modals.deleteNote"/>
+			v-if="modals.deleteNote"
+			:noteId="note.id"/>
 	</div>
 	
 </template>
 
 <script setup>
 import { computed, reactive } from 'vue'
-
-import { useStoreNotes } from '@/stores/storeNotes'
 import ModalDeleteNote from '@/components/Notes/ModalDeleteNote.vue'
 
-const storeNotes = useStoreNotes()
+
 
 const props = defineProps({
 	note: {
