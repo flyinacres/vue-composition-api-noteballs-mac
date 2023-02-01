@@ -43,5 +43,5 @@ import {ref} from 'vue'
 
 const storeNotes = useStoreNotes()
 const loveNoteballs = ref(null)
-useWatchCharacters(loveNoteballs)
+useWatchCharacters(loveNoteballs, 50)
 </script>
