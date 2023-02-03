@@ -1,5 +1,5 @@
 <template>
-	<nav class="navbar is-danger" role="navigation" aria-label="main navigation">
+	<nav class="navbar is-success" role="navigation" aria-label="main navigation">
 		<div class="container is-max-desktop px-2">
 			<div class="navbar-brand">
 				<div class="navbar-item is-size-4 is-family-monospace" >
@@ -27,7 +27,13 @@
 			ref="navbarMenuRef"
 			:class="{ 'is-active' : showMobileNav }">
 
-			<div class="navbar-end is-danger">
+			<div class="navbar-start">
+				<button class="button is-small is-info mt-3 ml-3"> 
+					Log out
+				</button>
+			</div>
+
+			<div class="navbar-end">
 				<RouterLink 
 					@click="showMobileNav=false"
 					to="/" class="navbar-item:" active-class="is-active">
