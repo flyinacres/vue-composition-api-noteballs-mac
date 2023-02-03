@@ -69,7 +69,15 @@ const formTitle = computed(() => {
 })
 
 const onSubmit = () => {
-	console.log('form submitted')
+	if (!credentials.email || !credentials.password) {
+		alert('enter an email and password')
+	} else {
+		if (register.value) {
+			console.log('register user with credentials', credentials)
+		} else {
+			console.log('log in user with credentials', credentials)
+		}
+	}
 }
 
 const credentials = reactive({
