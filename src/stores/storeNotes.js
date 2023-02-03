@@ -28,11 +28,9 @@ export const useStoreNotes = defineStore('storeNotes', {
 					}
 					notes.push(note)
 				})
-				// Use a two second delay to test out the progress bar
-				setTimeout(() => {
-					this.notes = notes
-					this.notesLoaded = true
-				}, 2000)
+
+				this.notes = notes
+				this.notesLoaded = true
 				
 			})
 		},
