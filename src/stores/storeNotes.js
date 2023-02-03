@@ -10,11 +10,13 @@ export const useStoreNotes = defineStore('storeNotes', {
 	state: () => {
 		return { 
 			notes: [
-		]}
+			],
+			notesLoaded: false
+		}
 	},
 	actions: {
 		async getNotes() {
-
+			this.notesLoaded = false
 			// This code dynamically updates data as it is changed on the server
 			const unsubscribe = onSnapshot(notesCollectionQuery, (querySnapshot) => {
 				let notes = []
@@ -26,7 +28,12 @@ export const useStoreNotes = defineStore('storeNotes', {
 					}
 					notes.push(note)
 				})
-				this.notes = notes
+				// Use a two second delay to test out the progress bar
+				setTimeout(() => {
+					this.notes = notes
+					this.notesLoaded = true
+				}, 2000)
+				
 			})
 		},
 		async addNote(newNoteContent) {
