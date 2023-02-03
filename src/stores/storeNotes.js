@@ -1,7 +1,9 @@
 
 import { defineStore } from 'pinia'
-import { collection, onSnapshot } from "firebase/firestore"
+import { collection, onSnapshot, setDoc, doc } from "firebase/firestore"
 import {db} from '@/js/firebase'
+
+const notesCollectionRef = collection(db, "notes")
 
 export const useStoreNotes = defineStore('storeNotes', {
 	state: () => {
@@ -18,18 +20,9 @@ export const useStoreNotes = defineStore('storeNotes', {
 	},
 	actions: {
 		async getNotes() {
-			// This code only loads data at the start
-			// const querySnapshot = await getDocs(collection(db, "notes"))
-			// querySnapshot.forEach((doc) => {
-  			// 	let note = { 
-			// 		id: doc.id,
-			// 		content: doc.data().content
-			// 	}
-  			// 	this.notes.push(note)
-			// 	})
 
 			// This code dynamically updates data as it is changed on the server
-			const unsubscribe = onSnapshot(collection(db, "notes"), (querySnapshot) => {
+			const unsubscribe = onSnapshot(notesCollectionRef, (querySnapshot) => {
 				let notes = []
 				querySnapshot.forEach((doc) => {
 					let note = { 
@@ -41,15 +34,20 @@ export const useStoreNotes = defineStore('storeNotes', {
 				this.notes = notes
 			})
 		},
-		addNote(newNoteContent) {
+		async addNote(newNoteContent) {
 			let currentDate = new Date().getTime()
 			let id = currentDate.toString()
 		
-			let note = {
-				id,
-				content: newNoteContent
-			}
-			this.notes.unshift(note)
+			// let note = {
+			// 	id,
+			// 	content: newNoteContent
+			// }
+			//this.notes.unshift(note)
+
+			// Add a new document in collection "cities"
+			await setDoc(doc(notesCollectionRef, id), {
+			content: newNoteContent
+			})
 		},
 		deleteNote(idToDelete) {
 			this.notes = this.notes.filter(note => {return note.id != idToDelete} )
