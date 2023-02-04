@@ -61,6 +61,9 @@
 
 <script setup>
 import {ref, computed, reactive} from 'vue'
+import { useStoreAuth } from '@/stores/storeAuth'
+
+const storeAuth = useStoreAuth()
 
 const register = ref(false)
 
@@ -73,9 +76,9 @@ const onSubmit = () => {
 		alert('enter an email and password')
 	} else {
 		if (register.value) {
-			console.log('register user with credentials', credentials)
+			storeAuth.registerUser(credentials)
 		} else {
-			console.log('log in user with credentials', credentials)
+			storeAuth.loginUser(credentials)
 		}
 	}
 }
