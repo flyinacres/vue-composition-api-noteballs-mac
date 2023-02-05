@@ -6,6 +6,7 @@ import { useStoreAuth } from '@/stores/storeAuth'
 
 var notesCollectionRef
 var notesCollectionQuery
+let getNotesSnapshot = null
 
 export const useStoreNotes = defineStore('storeNotes', {
 	state: () => {
@@ -26,8 +27,9 @@ export const useStoreNotes = defineStore('storeNotes', {
 		},
 		async getNotes() {
 			this.notesLoaded = false
+
 			// This code dynamically updates data as it is changed on the server
-			const unsubscribe = onSnapshot(notesCollectionQuery, (querySnapshot) => {
+			getNotesSnapshot = onSnapshot(notesCollectionQuery, (querySnapshot) => {
 				let notes = []
 				querySnapshot.forEach((doc) => {
 					let note = { 
@@ -44,6 +46,11 @@ export const useStoreNotes = defineStore('storeNotes', {
 			})
 		},
 		clearNotes() {
+			// If an existing snapshot exists, call it to unsubscribe
+			if (getNotesSnapshot) {
+				getNotesSnapshot()
+			}
+						
 			this.notes = []
 		},
 		async addNote(newNoteContent) {
