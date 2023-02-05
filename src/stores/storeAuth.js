@@ -14,6 +14,8 @@ export const useStoreAuth = defineStore('storeAuth', {
 	},
 	actions: {
 		init() {
+			const storeNotes = useStoreNotes()
+
 			onAuthStateChanged(auth, (user) => {
 				if (user) {
 					console.log('user logged in: ', user)
@@ -21,14 +23,13 @@ export const useStoreAuth = defineStore('storeAuth', {
 					this.user.email = user.email
 
 					this.router.push('/')
-
-					const storeNotes = useStoreNotes()
 					// Should be safe to initialize the notes now
 					storeNotes.init()
 				} else {
 					console.log('user logged out: ', user)
 					this.user = {}
 					this.router.replace('/auth')
+					storeNotes.clearNotes()
 				}
 			}
 		)},
