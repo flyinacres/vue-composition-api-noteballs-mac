@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, markRaw } from 'vue'
 import App from './App.vue'
 
 import './assets/main.css'
@@ -8,7 +8,12 @@ import './assets/main.css'
 import router from '@/router'
 import { createPinia } from 'pinia'
 
+const pinia = createPinia()
+pinia.use(({ store }) => {
+	store.router = markRaw(router)
+  })
+
 createApp(App)
-	.use(createPinia())
+	.use(pinia)
 	.use(router)
 	.mount('#app')
