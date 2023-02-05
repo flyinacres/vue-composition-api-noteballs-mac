@@ -33,4 +33,9 @@ const router = createRouter({
 	routes
 })
 
+// A hook which is fired everytime a user tries to go to a new route
+router.beforeEach( async (to, from) => {
+	console.log('to: ', to)
+})
+
 export default router
