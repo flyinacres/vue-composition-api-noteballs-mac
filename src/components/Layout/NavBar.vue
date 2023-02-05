@@ -31,7 +31,7 @@
 				<button 
 					v-if="storeAuth.user.id"
 					@click="logout"
-					class="button is-small is-info mt-3 ml-3 is-pulled-left"> 
+					class="button is-small is-info ml-3 is-pulled-left"> 
 					Log out {{ storeAuth.user.email }}
 				</button>
 			</div>
@@ -39,12 +39,12 @@
 			<div class="navbar-end">
 				<RouterLink 
 					@click="showMobileNav=false"
-					to="/" class="navbar-item: is-pulled-right" active-class="is-active">
+					to="/" class="navbar-item: is-pulled-right ml-3" active-class="is-active">
 					Notes
 				</RouterLink>
 				<RouterLink 
 					@click="showMobileNav=false"
-					to="/stats" class="navbar-item: is-pulled-right" active-class="is-active">
+					to="/stats" class="navbar-item: is-pulled-right ml-3" active-class="is-active">
 					Stats
 				</RouterLink>
 			</div>
