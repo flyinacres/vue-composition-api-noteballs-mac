@@ -2,9 +2,10 @@
 import { defineStore } from 'pinia'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from "firebase/firestore"
 import {db} from '@/js/firebase'
+import { useStoreAuth } from '@/stores/storeAuth'
 
-const notesCollectionRef = collection(db, "users", "mqLFCEJnMRbwWJKXNqgXx4m8kCy1", "notes")
-const notesCollectionQuery = query(notesCollectionRef, orderBy("date", 'desc'));
+var notesCollectionRef
+var notesCollectionQuery
 
 export const useStoreNotes = defineStore('storeNotes', {
 	state: () => {
@@ -15,6 +16,14 @@ export const useStoreNotes = defineStore('storeNotes', {
 		}
 	},
 	actions: {
+		init() {
+			const storeAuth = useStoreAuth() 
+
+			notesCollectionRef = collection(db, "users", storeAuth.user.id, "notes")
+			notesCollectionQuery = query(notesCollectionRef, orderBy("date", 'desc'));
+
+			this.getNotes()
+		},
 		async getNotes() {
 			this.notesLoaded = false
 			// This code dynamically updates data as it is changed on the server

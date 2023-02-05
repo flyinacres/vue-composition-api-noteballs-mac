@@ -2,6 +2,9 @@
 import { defineStore } from 'pinia'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth"
 import { auth } from '@/js/firebase'
+import { useStoreNotes } from '@/stores/storeNotes'
+
+
 
 export const useStoreAuth = defineStore('storeAuth', {
 	state: () => {
@@ -16,7 +19,12 @@ export const useStoreAuth = defineStore('storeAuth', {
 					console.log('user logged in: ', user)
 					this.user.id = user.uid
 					this.user.email = user.email
+
 					this.router.push('/')
+
+					const storeNotes = useStoreNotes()
+					// Should be safe to initialize the notes now
+					storeNotes.init()
 				} else {
 					console.log('user logged out: ', user)
 					this.user = {}
@@ -25,12 +33,10 @@ export const useStoreAuth = defineStore('storeAuth', {
 			}
 		)},
 		registerUser(credentials) {
-			console.log('about to create the user')
 			createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
 		.then((userCredential) => {
 			// Signed in 
 			const user = userCredential.user
-			//console.log('register user: ', user)
 		})
 		.catch((error) => {
 			const errorCode = error.code
